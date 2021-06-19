@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public enum statesEnum { none, nextTurn, player1Turn, player2Turn, AIPlayer1, AIPlayer2 };
+public enum statesEnum { none, nextTurn, player1Turn, player2Turn, AIPlayer1, AIPlayer2, check };
 public class InGame : MonoBehaviour
 {
     Board board;
@@ -35,6 +35,7 @@ public class InGame : MonoBehaviour
         for (int i = 0; i < data.players; i++) { states.Add(playersDictionary[i], new PlayerTurn(board, view, i, SetCurrentState));}
         for (int i = data.players; i < data.maxPlayers; i++) { states.Add(playersDictionary[i], new AIRandomState(board, view, i, SetCurrentState)); }
         states.Add(statesEnum.nextTurn, new NextTurnState(board, view, data.maxPlayers, playersDictionary, SetCurrentState));
+        states.Add(statesEnum.check, new CheckGameStatusState(board, view, SetCurrentState));
         SetCurrentState(statesEnum.nextTurn);
     }
     MatchData GetMatchData(string st) {

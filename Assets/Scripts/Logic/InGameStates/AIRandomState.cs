@@ -15,15 +15,17 @@ public class AIRandomState : InGameState{
         for(int i = 0; i < amount; i++) {
             if (board.IsAnEmptySlotInRowAviable(i)) { rowIndexList.Add(i); }
         }
+        if(rowIndexList.Count == 0) { return; }
         random = new System.Random();
         rowIndex = rowIndexList[random.Next(0, rowIndexList.Count)];
         board.SetChipInSlot(playerId, rowIndex);
         ViewHandler();
         SetNewState();
     }
-    public override void SetNewState() { nextStateAction.Invoke(statesEnum.nextTurn); }
+    public override void SetNewState() { nextStateAction.Invoke(statesEnum.check); }
     public override void OnRowSelected(int index) {}
     public override void ViewHandler() {
         view.DropAChip(rowIndex, board.GetChipPositionOnTopOfRow(rowIndex), playerId);
     }
+
 }
