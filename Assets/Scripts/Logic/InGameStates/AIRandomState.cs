@@ -22,7 +22,6 @@ public class AIRandomState : InGameState{
         ViewHandler();
         SetNewState(statesEnum.check);
     }
-    public override void SetNewState(statesEnum s) { nextStateAction.Invoke(s); }
     public override void OnRowSelected(int index) {}
     public override void ViewHandler() {
         view.DropAChip(rowIndex, board.GetChipPositionOnTopOfRow(rowIndex), playerId);

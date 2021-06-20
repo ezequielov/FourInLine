@@ -44,34 +44,63 @@ public class Board {
         return IsWinConditionInLine(playerId, amount) || IsWinConditionInRow(playerId, amount) || IsWinConditionInDiagonal(playerId, amount);
     }
     public bool IsWinConditionInLine(int playerId, int amount = 4) {
-        foreach(int i in slotAviablePerRow) {
-            if(i > 0) {
-                int y = i - 1;
-                for (int xPos = 0; xPos < grid.Length; xPos++) {
-                    if (xPos <= grid.Length - amount) {
-                        int newAmount = amount + xPos;
-                        bool b = true;
-                        for (int x = xPos; x < newAmount; x++) {
-                            if (grid[x][y] != playerId) { b = false; }
-                        }
-                        if (b) { return true; }
+        bool b = false;
+        foreach (int i in slotAviablePerRow) { if (IsWinConditionInLine(i, playerId, amount)) { b = true; } }
+        return b;
+    }
+    public bool IsWinConditionInLine(int i, int playerId, int amount = 4) {
+        if (i > 0) {
+            int y = i - 1;
+            for (int xPos = 0; xPos < grid.Length; xPos++) {
+                if (xPos <= grid.Length - amount) {
+                    int newAmount = amount + xPos;
+                    bool b = true;
+                    for (int x = xPos; x < newAmount; x++) {
+                        if (grid[x][y] != playerId) { b = false; }
                     }
+                    if (b) { return true; }
                 }
             }
         }
         return false;
     }
+    public int GetHowManyBeside(int xPos, int playerId, bool toRight, int amount) {
+        int direction = 0;
+        int lineLength = amount;
+        if (toRight) {
+            if(xPos + lineLength >= grid.Length) { lineLength = grid.Length - 1 - xPos; }
+            direction = 1;
+        }
+        else {
+            if (xPos - lineLength < 0) { lineLength = xPos; }
+            direction = -1;
+        }
+        int counter = 0;
+        int yPos = slotAviablePerRow[xPos];
+        int x = xPos + direction;
+
+        for (int i = 0; i < lineLength; i++) { 
+            if(grid[x + (i * direction)][yPos] == playerId) { counter++; }
+            else { return counter; }
+        }
+        return counter;
+    }
     public bool IsWinConditionInRow(int playerId, int amount = 4) {
-        for(int x = 0; x < slotAviablePerRow.Length; x++) {
-            int topY = slotAviablePerRow[x] -1;
-            if (slotAviablePerRow[x] >= amount) {
-                int newAmount = topY - amount;
-                bool b = true;
-                for (int y = topY; y > newAmount; y--) {
-                    if (grid[x][y] != playerId) { b = false; }
-                }
-                if (b) { return true; }
+        bool b = false;
+        for (int x = 0; x < slotAviablePerRow.Length; x++) {
+            if(IsWinConditionInRow(x, playerId, amount)) { b = true; }
+        }
+        return b;
+    }
+    public bool IsWinConditionInRow(int x, int playerId, int amount = 4) {
+        int topY = slotAviablePerRow[x] - 1;
+        if (slotAviablePerRow[x] >= amount) {
+            int newAmount = topY - amount;
+            bool b = true;
+            for (int y = topY; y > newAmount; y--) {
+                if (grid[x][y] != playerId) { b = false; }
             }
+            if (b) { return true; }
         }
         return false;
     }

@@ -15,13 +15,16 @@ public class NextTurnState : InGameState{
         this.onNewCurrentPlayer = onNewCurrentPlayer;
     }
     public override void Init() {
+        if (!board.IsAnEmptySlotInBoardAviable()) {
+            SetNewState(statesEnum.draw);
+            return;
+        }
         current++;
         currentMod = current % players;
         onNewCurrentPlayer.Invoke(currentMod);
         SetNewState(playersDictionary[currentMod]);
     }
     public override void OnRowSelected(int index) { }
-    public override void SetNewState(statesEnum s) { nextStateAction.Invoke(s); }
     public override void ViewHandler() { 
         
     }

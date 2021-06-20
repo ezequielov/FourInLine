@@ -14,7 +14,7 @@ public abstract class InGameState {
     }
     public abstract void Init();
     public abstract void OnRowSelected(int index);
-    public abstract void SetNewState(statesEnum s);
+    public void SetNewState(statesEnum s) { nextStateAction.Invoke(s); }
     public abstract void ViewHandler();
     public virtual void NewCurrentPlayer(int id) { }
 

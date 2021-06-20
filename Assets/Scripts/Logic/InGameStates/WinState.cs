@@ -8,7 +8,6 @@ public class WinState : InGameState{
     public override void Init() {
         ViewHandler();
     }
-    public override void SetNewState(statesEnum s) { nextStateAction.Invoke(s); }
     public override void OnRowSelected(int index) { }
     public override void ViewHandler() { 
         view.ShowWinner(true, currentPlayer);

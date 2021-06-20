@@ -8,7 +8,7 @@ using TMPro;
 public class BoardView : MonoBehaviour
 {
     [SerializeField] Transform chipHolder;
-    [SerializeField] TextMeshProUGUI winner;
+    [SerializeField] TextMeshProUGUI winner, draw;
     Action<int> onRowSelected;
     Rect myRect;
     Button[] selectorRow;
@@ -54,6 +54,10 @@ public class BoardView : MonoBehaviour
     public void ShowWinner(bool b, int playerIndex) {
         winner.text = "PLAYER " + playerIndex + " WINS !!";
         winner.gameObject.SetActive(b);
+    }
+    public void Draw(bool b = true) {
+        draw.text = "DRAW";
+        draw.gameObject.SetActive(b);
     }
     public void SetCurrentPlayer(int id) {
 
