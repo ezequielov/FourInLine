@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 3815447211499920838}
   - component: {fileID: 1283332195844197550}
   m_Layer: 0
-  m_Name: Chip_2
+  m_Name: Chip
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -58,12 +58,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.0039215684, g: 1, b: 0.213204, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 497ac9ef0e70a0340be9fac1ae9715d5, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 71b3b77801169454f82dcc4529c58af5, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1

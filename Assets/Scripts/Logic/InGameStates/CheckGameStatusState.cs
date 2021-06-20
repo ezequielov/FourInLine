@@ -5,7 +5,7 @@ using System;
 
 public class CheckGameStatusState : InGameState {
     int currentPlayer;
-    public CheckGameStatusState(Board board, BoardView view, Action<statesEnum> nextStateAction) : base(board, view, nextStateAction) { }
+    public CheckGameStatusState(Board board, BoardView view, Action<statesEnum> nextStateAction, statesEnum myState) : base(board, view, nextStateAction, myState) { }
     public override void Init() {
         if (board.IsWinConditionAchieved(currentPlayer)) { SetNewState(statesEnum.win); }
         else { SetNewState(statesEnum.nextTurn); }       

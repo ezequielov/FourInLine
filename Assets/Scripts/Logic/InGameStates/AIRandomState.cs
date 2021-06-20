@@ -6,7 +6,7 @@ using System;
 public class AIRandomState : InGameState{
     int rowIndex, playerId;
     System.Random random;
-    public AIRandomState(Board board, BoardView view, int id, Action<statesEnum> nextStateAction) : base(board, view, nextStateAction) {
+    public AIRandomState(Board board, BoardView view, int id, Action<statesEnum> nextStateAction, statesEnum myState) : base(board, view, nextStateAction, myState) {
         playerId = id;
     }
     public override void Init() {
@@ -24,6 +24,7 @@ public class AIRandomState : InGameState{
     }
     public override void OnRowSelected(int index) {}
     public override void ViewHandler() {
+        view.AddNextState(myState);
         view.DropAChip(rowIndex, board.GetChipPositionOnTopOfRow(rowIndex), playerId);
     }
 
