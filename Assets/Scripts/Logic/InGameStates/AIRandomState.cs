@@ -20,9 +20,9 @@ public class AIRandomState : InGameState{
         rowIndex = rowIndexList[random.Next(0, rowIndexList.Count)];
         board.SetChipInSlot(playerId, rowIndex);
         ViewHandler();
-        SetNewState();
+        SetNewState(statesEnum.check);
     }
-    public override void SetNewState() { nextStateAction.Invoke(statesEnum.check); }
+    public override void SetNewState(statesEnum s) { nextStateAction.Invoke(s); }
     public override void OnRowSelected(int index) {}
     public override void ViewHandler() {
         view.DropAChip(rowIndex, board.GetChipPositionOnTopOfRow(rowIndex), playerId);

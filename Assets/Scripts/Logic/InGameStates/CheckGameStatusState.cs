@@ -4,14 +4,14 @@ using UnityEngine;
 using System;
 
 public class CheckGameStatusState : InGameState {
+    int currentPlayer;
     public CheckGameStatusState(Board board, BoardView view, Action<statesEnum> nextStateAction) : base(board, view, nextStateAction) { }
     public override void Init() {
-        Debug.Log("CHECK STATE!!!");
-        if(board.IsWinConditionInRow(0, 4)) { Debug.Log("PLAYER 0 WINS!!!"); }
-        if (board.IsWinConditionInRow(1, 4)) { Debug.Log("PLAYER 1 WINS!!!"); }
-        SetNewState();
+        if (board.IsWinConditionAchieved(currentPlayer)) { SetNewState(statesEnum.win); }
+        else { SetNewState(statesEnum.nextTurn); }       
     }
-    public override void SetNewState() { nextStateAction.Invoke(statesEnum.nextTurn); }
+    public override void SetNewState(statesEnum s) { nextStateAction.Invoke(s); }
     public override void OnRowSelected(int index) {}
     public override void ViewHandler() { }
+    public override void NewCurrentPlayer(int id) { currentPlayer = id; }
 }

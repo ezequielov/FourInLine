@@ -9,13 +9,13 @@ public class PlayerTurn : InGameState {
         playerId = id;
     }
     public override void Init() { }
-    public override void SetNewState() { nextStateAction.Invoke(statesEnum.check);}
+    public override void SetNewState(statesEnum s) { nextStateAction.Invoke(s);}
     public override void OnRowSelected(int index) {
         if (board.IsAnEmptySlotInRowAviable(index)) { 
             board.SetChipInSlot(playerId, index);
             rowIndex = index;
             ViewHandler();
-            SetNewState();
+            SetNewState(statesEnum.check);
         }        
     }
     public override void ViewHandler() {

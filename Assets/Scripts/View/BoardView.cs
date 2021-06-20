@@ -3,10 +3,12 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using System;
+using TMPro;
 
 public class BoardView : MonoBehaviour
 {
     [SerializeField] Transform chipHolder;
+    [SerializeField] TextMeshProUGUI winner;
     Action<int> onRowSelected;
     Rect myRect;
     Button[] selectorRow;
@@ -48,5 +50,12 @@ public class BoardView : MonoBehaviour
         GameObject go = Instantiate<GameObject>(Resources.Load<GameObject>("Prefabs/Chip_" + player));
         go.transform.parent = chipHolder;
         go.GetComponent<RectTransform>().position = gridView[row][line];
+    }
+    public void ShowWinner(bool b, int playerIndex) {
+        winner.text = "PLAYER " + playerIndex + " WINS !!";
+        winner.gameObject.SetActive(b);
+    }
+    public void SetCurrentPlayer(int id) {
+
     }
 }
